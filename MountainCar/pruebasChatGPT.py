@@ -1,5 +1,5 @@
-import gym
 import numpy as np
+from MountainCarEnv import MountainCarEnv
 
 '''
 Aquí tienes un ejemplo de cómo implementar el algoritmo de Q-Learning en 
@@ -28,9 +28,16 @@ def q_learning(env, num_episodes, alpha, gamma, epsilon):
         while not done:
             # Elegir una acción utilizando la política epsilon-greedy
             if np.random.rand() < epsilon:
+                # explore
                 action = env.action_space.sample()
             else:
+                # exploit
                 action = np.argmax(Q[state])
+
+            state = get_state(np.array([-0.4, 0.2]))
+
+            print("El estado es" + state)
+            print("La accion es "+ action)
 
             # Tomar la acción y observar el siguiente estado y recompensa
             next_state, reward, done, _ = env.step(action)
@@ -43,7 +50,17 @@ def q_learning(env, num_episodes, alpha, gamma, epsilon):
     return Q
 
 # Crear el entorno MountainCar
-env = gym.make('MountainCar-v0')
+env = MountainCarEnv(render_mode="human")
+
+#BORRAR
+pos_space = np.linspace(-5, 5, 10)
+vel_space = np.linspace(-3, 3, 2)
+
+def get_state(obs):
+    pos, vel = obs
+    pos_bin = np.digitize(pos, pos_space)
+    vel_bin = np.digitize(vel, vel_space)
+    return pos_bin, vel_bin
 
 # Definir los hiperparámetros
 num_episodes = 1000
