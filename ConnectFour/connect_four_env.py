@@ -31,7 +31,7 @@ class ConnectFourBaseEnv(gym.Env):
     def reset(self):
         self._current_player = player_one
         self._reset_grid()
-        return
+        return self._grid
     
     def render(self):
         self._grid.render()
