@@ -36,9 +36,6 @@ def q_learning(env, num_episodes, alpha, gamma, epsilon):
 
             state = get_state(np.array([-0.4, 0.2]))
 
-            print("El estado es" + state)
-            print("La accion es "+ action)
-
             # Tomar la acción y observar el siguiente estado y recompensa
             next_state, reward, done, _ = env.step(action)
 
