@@ -1,0 +1,65 @@
+Clase 16/05/23 - Grupo N7A - Min 1:47
+
+MOUNTAIN CAR
+- En el MountainCar el archivo MountainCarEnv.py es el enviroment que no lo tenemos ni
+  que tocar.
+- El agent.ipynp es para interactuar con el entorno.
+- El mountaincar.ipynp se podría usar como no, es opcional.
+- En la última parte se simula lo que tendríamos que hacer nosotros en Q-Learning. Elijo
+  la acción a realizar con el epsilon_greedy_policy que será 0, 1 ó 2 si corresponde
+  hacer exploración ó el máx Q si corresponde hacer exploit.
+- El epsilon_greedy_policy pasa un epsilon de 0.1, luego asigna a explore el valor de 
+  binomial(1, epsilon) que es la probabilidad real. El epsilon, para priorizar la 
+  exploración debería ser cercano a 1 y luego se irá achicando para que explote.
+- Es importante estudiar y variar los valores de:
+    pos_space = np.linspace(-5, 5, 10)
+    vel_space = np.linspace(-3, 3, 2)
+
+  Hay que variar los parámetros, estados y los distintos valores.
+
+CONNECT FOUR
+- Es el juego 4 en línea.
+- Se nos da una notebook Connect_four.ipynp que es un ambiente hecho de cero.
+- Jugamos nosotros contra la IA.
+- La IA estará jugando como lo indique el notebook spaceGPT_agent_obf.py.
+- Está el enviroment connect_four_env.py y el board hecho en board.py.
+- También es agente es agent.py.
+- Al ejecutar el Connect_four.ipynp se debe ingresar un número del 0 al 6 con
+  que se desea jugar cada vez.
+
+Clase 18/05/23 - Grupo M7B
+
+- MountainCar es con Q-Learning.
+- El sistema antiaburrimiento será utilizando minimax y expectimax.
+- La idea es que la notebook que usemos para ejecutar tenga el código mínimo
+  para ejecutar. Luego debemos desarrollar un código en python.
+- Es recomendable que no tengamos notebooks complejas para evitar errores.
+- Una vez tengamos una notebook armada, que digamos que es la que queremos 
+  ejecutar, ahí generamos un HTML o PDF con la ejecución de la notebook.
+- También un breve informe en formato PDF.
+- Todo debe ir guardado en un zip que se deberá subir a gestión.
+- Luego nos darán los lenamientos del informe.
+- Lo que debemos hacer es la experimentación de mucho código por todos lados,
+  incluso podemos consultar a ChatGPT para que nos genere código.
+- La dificultad estará en organizar bien los expermientos, poder compararlos y 
+  variar los parámetros.
+- En Q-Learning variar el gamma, el alfa y el epsilon. Debemos discretizar los 
+  estados.
+- Debemos comparar, presentar y recurrir a técnicas y herramientas de visualización.
+  Por ejemplo plotear una curva de los valores que vamos observando.
+- Se sugiere que generemos logs.
+- Es importante que si usamos por ejemplo ChatGPT, el libro o cualquier otra fuente
+  para el código lo nombremos. Es muy importante la parte experimental.
+- Debemos incluir un resumen de como abordar la tarea, incluyendo información relevante,
+  como atacar un cierto problema, como abordamos por ejemplo el análisis de los 
+  parámetros, si todo junto, si fuimos variando de a uno, etc. Cómo descompusimos el 
+  problema, cuál atacamos, si atacamos todo junto, la discretización de los parámetros, 
+  etc. Cómo medimos y agregar un apoyo visual mediante herramientas de python que nos 
+  permitan plotear curvas.
+  A veces es mejor poner tablas y otras es mejor curvas. En particular, en Q-Learning
+  los algoritmos son iterativos y pueden ir evolucionando. Esta evolución tiene 
+  sentido mostrarlo como curvas para ver cómo fue mejorando o empeorando por ejemplo Q.
+  Cómo va evolucionando la estrategia. 
+  Cualquier nota de advertencia para comunicar a la empresa.
+- Es importante que sea la versión 0.26 de gym.
+- LAS EJECUCIONES VAN A DEMORAR.
