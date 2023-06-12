@@ -63,3 +63,99 @@ Clase 18/05/23 - Grupo M7B
   Cualquier nota de advertencia para comunicar a la empresa.
 - Es importante que sea la versión 0.26 de gym.
 - LAS EJECUCIONES VAN A DEMORAR.
+
+MOUNTAIN CAR
+- El MountainCarEnv.py es el ambiente que está adaptado a Gym.
+- El agent.ipynp es la notebook para probar el entorno y la simulación del ambiente.
+- El mountaincar.ipynp es una notebook con cosas que nos pueden servir.
+- Para el código, el algoritmo y el tratamiento de los parámetros, lo mejor es crear
+  un archivo python y después una notebook para ver los resultados y comparar.
+- El ActionSpace son las 3 acciones que son 0,1 y 2. Donde 0 es acelerar a la izquierda,
+  1 es no acelerar y 2 es acelerar a la derecha.
+- Las transiciones están basadas en el ObservationSpace que es 0, la posición del carrito
+  y 1 que es la velocidad. Tenemos que discretizar la posición contínua al igual que la 
+  velocidad para poder trabajar.
+- En Transition Dynamics se dan las leyes de la física que actualizan los valores.
+- La recompensa es por cada movimiento que hace y es -1.
+- La cantidad de episodios máxima que se puede hacer en una corrida está topeada en
+  500. Lo peor que puede pasar es que la recompensa sea de -500.
+- Si la recompensa da más de -500, entonces pudo llegar antes de los 500 episodios
+  a la cima.
+- Si no llega el carrito a la bandeja, la recompensa será de -500. Serían 500 pasos.
+- Siempre trabajaremos con recompensas negativas.
+- La posición inicial es un valor randómico entre -0,6 y -0,4 y la velocidad inicial
+  es siempre 0.
+- El episodio puede terminar si llegó a la cima o si el largo del episodio es 500.
+- Hay 2 render_mode, uno es human que nos mostrará una interfaz gráfica con el carrito
+  moviéndose e intentando llegar a la cima y el otro es rgb_array que no lo vamos a usar
+  pero cuando realicemos el algoritmo hay que pasarle el rgb_array para que no muestre
+  todo el tiempo la interfaz gráfica mientras está aprendiendo.
+- Lo primero que deberíamos hacer es jugar con el ambiente, probar cuales son las 
+  reacciones, probar las acciones, cuáles son las operaciones iniciales, hago reset, etc.
+- La notebook mountaincar.ipynp tiene cosas que podemos utilizar si así lo preferimos.
+- Tenemos:
+    pos_space = np.linspace(-5, 5, 10)
+    vel_space = np.linspace(-3, 3, 2)
+  Vamos a tener que discretizar las observaciones de posición (pos_space) y velocidad
+  (vel_space) para no tener infinitos estados.
+  Queremos tener una cantidad de estados controlada.
+- np.linspace(-5, 5, 10) nos da 10 divisiones entre -5 y 5.
+- np.linspace(-3, 3, 2) nos da 2 divisiones entre -3 y 3, así tendríamos 20 estados
+  (10x2)
+- El def get_state(obs) recibe una observación del ambiente y nos diría por ejemplo
+  a qué posición correspondería para poder actualizar en el Q esa observación y una 
+  determinada acción.
+- El numpy.digitize retorna el índice de lo que se llama bins, que sería lo anterior, que
+  sería el valor que le corresponde en el array.
+- En state = get_state(np.array([-0.4, 0.2])), el np.array sería la observación y nos 
+  devuelve el estado real.
+  Que es el estado que manejaremos en el ambiente.
+- En Q = np.zeros((11, 3, 3)) inicializamos el Q. Ahí son ceros. El 11 es porque son 10
+  divisiones, luego el primer 3 es porque son 2 divisiones y el último 3 es porque son 
+  3 acciones.
+- El Q puede ser un diccionario o un np.array. El np.array es mucho más rápido.
+  Cargo el Q de el estado y la acción en el array tridimensional.
+- Lo último del mountaincar.ipynp sería el Q-Learning incompleto. Por ejemplo, falta el
+  alfa, el gamma y demás.
+- En epsilon_greedy_policy, al principio lo que más conviene es explorar dejando el 
+  epsilon en un valor alto. Y al final en un valor bajo para poder explotar. Esto se
+  espera que se haga el análisis, de cómo se varió el epsilon y qué resultados dio.
+- Se recomienda crear un archivo en python, armar el algoritmo, usar el 
+  epsilon_greedy_policy y los tratamientos de los parámetros, ver la cantidad de estados
+  generados, lo cual depende de la cantidad de estados que se hagan en el np.linspace. Si
+  se hacen muchos estados, seguramente van a generar más episodios y si se hacen pocos, 
+  se generarán menos.
+- En Q-Learning hay dos visualizaciones interesantes, una es la fase de aprendizaje para
+  aprender la policy óptima pero no la ejecuta.
+
+PROCEDIMIENTO:
+discretización
+loop:
+    - aprendizaje: Q-Learning {
+                    - Cantidad de iteraciones (Se necesitan variar)
+                    - Gamma
+                    - Alfa
+                    - Epsilon
+                } ====> Esto genera la salida Q, π*
+    - ejecución: Cantidad de iteraciones (medir recompensas acumuladas)
+      (control)
+      (sería como el test de Machine Learning)
+      (Se pueden registrar los valores de las recompensas obtenidas en cada 
+      episodio ejecutado de acuerdo a la policy y el promedio ó total de 
+      recompensas sobre todos los episodios)
+
+
+- Nos puede servir el Pickle, de extensión .pkl nos sirve para guardar por 
+  ejemplo un Q que entrenamos previamente por horas. Se puede usar sólo si se 
+  mantiene la discretización, si se cambia ya no sirve.
+- Podemos usar Weights & Biases (https://wandb.ai/site) para el documento,
+  podemos hacer captura del log que se guarda con Weights & Biases.
+
+Clase 23/05/23 - Grupo N7A
+
+MOUNTAIN CAR
+- Para el obligatorio, el Q nos dirá cuánto es el Q para un estado y una acción
+  y nos dará la próxima acción que depende de si estoy explorando ó explotando lo
+  que yo ya tengo.
+- La idea es que podamos implementar la actualización de Q en base a la matríz, 
+  como ir actualizando ese Q y el alfa.
