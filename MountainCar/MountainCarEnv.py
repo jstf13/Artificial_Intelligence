@@ -61,7 +61,7 @@ class MountainCarEnv(gym.Env):
         if terminated:
             self.steps = 0
 
-        reward = -1.0
+        reward = -0.1 * action
 
         self.state = (position, velocity)
         if self.render_mode == "human":
