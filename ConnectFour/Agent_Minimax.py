@@ -1,38 +1,19 @@
-from Tic_Tac_Toe import TicTacToe
-from Agent import Agent
+from board import Board
+from agent import Agent
 import random
 
-animation = [
-    "[=     ]",
-    "[ =    ]",
-    "[  =   ]",
-    "[   =  ]",
-    "[    = ]",
-    "[     =]",
-    "[    = ]",
-    "[   =  ]",
-    "[  =   ]",
-    "[ =    ]",
-]
 
 
 class AgentMinimax(Agent):
     def __init__(self, player=1):
         super().__init__(player)
 
-    def policy(self, board: TicTacToe) -> tuple[int, int]:
+    def policy(self, board: Board) -> tuple[int, int]:
         self.idx = 0
         pos, _ = self.minimax(board, self.player)
         return pos
 
-    def minimax(self, board: TicTacToe, player: int)-> tuple[tuple[int, int], int]:
-        # Animación para que se vea lindo
-        print(animation[int(self.idx/300) % len(animation)], end="\r")
-        self.idx += 1
-        # Fin de animacion
-
-        #TODO: Completar
-
+    def minimax(self, board: Board, player: int)-> tuple[tuple[int, int], int]:
         #Caso base
         ended, winner = board.is_end()
         if ended:
@@ -76,3 +57,14 @@ class AgentMinimax(Agent):
                 value = max(value, minimax(temp_board, depth - 1, False))
 
         return chosen_action, value
+    
+    def next_action(self, obs):
+        while True:
+            try:
+                input_value = int(input())
+                return input_value
+            except ValueError:
+                print("Please insert a number.")
+
+    def heuristic_utility(self, board: Board):
+        return 0
