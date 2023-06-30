@@ -2,18 +2,68 @@ from board import Board
 from agent import Agent
 import random
 
+PLAYER_X = 1
+PLAYER_O = 2
 
 
 class AgentMinimax(Agent):
     def __init__(self, player=1):
         super().__init__(player)
+    def next_action(self, obs):
+        while True:
+            try:
+                input_value = int(input())
+                return input_value
+            except ValueError:
+                print("Please insert a number.")
 
-    def policy(self, board: Board) -> tuple[int, int]:
+    def heuristic_utility(self, board: Board):
+        if board.is_winning_cell((board._last_modified_cell[x], board._last_modified_cell[y])):
+            return float('inf') if board.current_player == PLAYER_X else float('-inf')
+
+        if board.is_full():
+            return 0
+
+        valid_moves = board.get_posible_actions()
+        best_score = float('-inf') if board.current_player == PLAYER_X else float('inf')
+
+        for col in valid_moves:
+            temp_board = board.clone()
+            temp_board.add_tile(col, board.current_player)
+            score = self.heuristic_utility(temp_board)
+            if board.current_player == PLAYER_X:
+                best_score = max(score, best_score)
+            else:
+                best_score = min(score, best_score)
+
+        return best_score
+
+
+    
+'''         ended = board.is_final()
+        if ended:
+            winner = board.winner()
+            if winner == self.player:
+                return 1
+            if winner == self.other_player:
+                return -1
+            else:
+                return 0
+        #Casos no base
+        actions = board.get_posible_actions()
+        random.shuffle(actions)
+        action_nodes = []
+        for action in actions:
+            child_node = board.clone()
+            action_nodes.append((action, child_node))
+            value = min(value, heuristic_utility(child_node)) '''
+
+'''     def policy(self, board: Board) -> tuple[int, int]:
         self.idx = 0
         pos, _ = self.minimax(board, self.player)
-        return pos
+        return pos '''
 
-    def minimax(self, board: Board, player: int)-> tuple[tuple[int, int], int]:
+'''     def minimax(self, board: Board, player: int)-> tuple[tuple[int, int], int]:
         #Caso base
         ended, winner = board.is_end()
         if ended:
@@ -56,15 +106,4 @@ class AgentMinimax(Agent):
                 drop_piece(temp_board, row, col, PLAYER_X)
                 value = max(value, minimax(temp_board, depth - 1, False))
 
-        return chosen_action, value
-    
-    def next_action(self, obs):
-        while True:
-            try:
-                input_value = int(input())
-                return input_value
-            except ValueError:
-                print("Please insert a number.")
-
-    def heuristic_utility(self, board: Board):
-        return 0
+        return chosen_action, value '''

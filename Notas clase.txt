@@ -159,3 +159,12 @@ MOUNTAIN CAR
   que yo ya tengo.
 - La idea es que podamos implementar la actualización de Q en base a la matríz, 
   como ir actualizando ese Q y el alfa.
+
+------------------------------------------------------------------------------------------------------------------
+CONSULTA FEDERICO ARMANDO 30/06/23
+- En el ConnnectFour lo que se pide es implementar un agente que pueda jugar con Oponente que es el agente spaceGPT_agent_obf
+- Debemos cambiar el InputAgent por uno que sea Minimax o Expectimax. Uno de los 2. Para ello, debemos definir una función
+  de evaluación (heuristic_utility) que sea buena y que cumpla los criterios que vimos
+- Si nos fijamos, el heuristic_utility ya recibe el board actual, donde debemos clonar y llamar recurrentemente para poder
+  obtener el proximo estado que nos maximice ganar.
+- Podemos tomar como base el InputAgent y complementar los métodos que faltan
