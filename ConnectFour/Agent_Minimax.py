@@ -57,10 +57,22 @@ class AgentMinimax(Agent):
         
         if player != self.player: # mini
             #Buscar acción que minimiza el valor
-            pass
+            #Del chatGPT sale:
+            value = float('inf')
+            for col in valid_moves:
+                temp_board = board.copy()
+                row = get_next_open_row(temp_board, col)
+                drop_piece(temp_board, row, col, PLAYER_O)
+                value = min(value, minimax(temp_board, depth - 1, True))
 
         else: #max (player == self.player)
             #Buscar acción que maximiza el valor
-            pass
+            #Del chatGPT sale:
+            value = float('-inf')
+            for col in valid_moves:
+                temp_board = board.copy()
+                row = get_next_open_row(temp_board, col)
+                drop_piece(temp_board, row, col, PLAYER_X)
+                value = max(value, minimax(temp_board, depth - 1, False))
 
         return chosen_action, value
