@@ -168,3 +168,22 @@ CONSULTA FEDERICO ARMANDO 30/06/23
 - Si nos fijamos, el heuristic_utility ya recibe el board actual, donde debemos clonar y llamar recurrentemente para poder
   obtener el proximo estado que nos maximice ganar.
 - Podemos tomar como base el InputAgent y complementar los métodos que faltan
+------------------------------------------------------------------------------------------------------------------
+FUNCIONES DE EVALUACIÓN SUGERIDAS POR ChatGPT PARA ConnectFour
+
+Aquí tienes algunas ideas para funciones de evaluación heurística que podrías utilizar en el juego Connect Four:
+
+1. Conteo de fichas en línea: Esta función evalúa la cantidad de fichas del jugador en línea en todas las direcciones posibles (horizontal, vertical, diagonal). Puedes asignar un puntaje más alto a las líneas con más fichas del jugador y un puntaje más bajo a las líneas con fichas del oponente.
+
+2. Espacios adyacentes: Evalúa la cantidad de espacios adyacentes vacíos a las fichas del jugador. Cuantos más espacios vacíos adyacentes haya, mayor será el puntaje. Esto podría indicar una mayor oportunidad de formar una línea ganadora.
+
+3. Bloqueo de oponente: Evalúa la cantidad de líneas en las que el oponente tiene más fichas consecutivas y menos espacios vacíos. Puedes asignar un puntaje negativo para indicar la necesidad de bloquear esas líneas.
+
+4. Control del centro del tablero: Evalúa si el jugador tiene fichas en el centro del tablero. El centro del tablero proporciona más oportunidades de formar líneas en diferentes direcciones. Puedes asignar un puntaje más alto si el jugador tiene fichas en el centro.
+
+5. Combinación de estrategias: Puedes combinar varias estrategias anteriores y asignar diferentes pesos a cada una de ellas para obtener una función de evaluación más completa. Por ejemplo, puedes sumar los puntajes de conteo de fichas en línea, espacios adyacentes y control del centro del tablero.
+
+Recuerda que la elección de la función de evaluación depende de tus objetivos específicos y del estilo de juego que deseas adoptar. Puedes experimentar con diferentes enfoques y ajustar los pesos y puntajes según sea necesario para obtener un agente que juegue de manera efectiva en el juego Connect Four.
+
+Espero que estas ideas te sean útiles en la creación de funciones de evaluación heurística para tu agente Minimax en el juego Connect Four.
+

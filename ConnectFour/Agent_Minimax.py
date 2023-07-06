@@ -1,6 +1,5 @@
 from board import Board
 from agent import Agent
-import random
 
 PLAYER_X = 1
 PLAYER_O = 2
@@ -9,6 +8,7 @@ PLAYER_O = 2
 class AgentMinimax(Agent):
     def __init__(self, player=1):
         super().__init__(player)
+
     def next_action(self, obs):
         while True:
             try:
@@ -17,6 +17,14 @@ class AgentMinimax(Agent):
             except ValueError:
                 print("Please insert a number.")
 
+    '''
+    Debemos definir la función de evaluación (heuristic_utility) que sea buena
+    y que cumpla con los criterios que vimos en el teórico.
+
+    El heuristic_utility ya recibe un tablero (board) actual, donde debemos clonar
+    y llamar recurrentemente para poder obtener el próximo estado que nos maximice
+    ganar.
+    '''
     def heuristic_utility(self, board: Board):
         if board.is_winning_cell((board._last_modified_cell[x], board._last_modified_cell[y])):
             return float('inf') if board.current_player == PLAYER_X else float('-inf')
