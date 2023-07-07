@@ -1,14 +1,13 @@
 from board import Board
 from agent import Agent
 
-PLAYER_X = 1
-PLAYER_O = 2
+PLAYER_X = "X"
+PLAYER_O = "O"
 
-
-class AgentMinimax(Agent):
-    def __init__(self, player=1):
+'''     def __init__(self, player=1):
         super().__init__(player)
-
+ '''
+class AgentMinimax(Agent):
     def next_action(self, obs):
         while True:
             try:
@@ -26,20 +25,20 @@ class AgentMinimax(Agent):
     ganar.
     '''
     def heuristic_utility(self, board: Board):
-        if board.is_winning_cell((board._last_modified_cell[x], board._last_modified_cell[y])):
-            return float('inf') if board.current_player == PLAYER_X else float('-inf')
+        if board.is_winning_cell((board._last_modified_cell)):
+            return float('inf') if board.winner == PLAYER_X else float('-inf')
 
         if board.is_full():
             return 0
 
         valid_moves = board.get_posible_actions()
-        best_score = float('-inf') if board.current_player == PLAYER_X else float('inf')
+        best_score = float('-inf') if board._get_player_str == PLAYER_X else float('inf')
 
         for col in valid_moves:
             temp_board = board.clone()
             temp_board.add_tile(col, board.current_player)
             score = self.heuristic_utility(temp_board)
-            if board.current_player == PLAYER_X:
+            if board._get_player_str == PLAYER_X:
                 best_score = max(score, best_score)
             else:
                 best_score = min(score, best_score)
