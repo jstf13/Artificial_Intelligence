@@ -25,5 +25,3 @@ class InputAgent(Agent):
 
     def heuristic_utility(self, board: Board):
         return 0
-    
-        
